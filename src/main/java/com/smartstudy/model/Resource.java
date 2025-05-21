@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,7 +30,7 @@ public class Resource {
      private String resourceName;
 
      @Column(name = "resource_url")
-     private String reourceURL;
+     private String resourceURL;
 
      @Column(name="registration-date")
      private Date registrationDate;
@@ -36,4 +38,7 @@ public class Resource {
      @Column(name="active")
      private boolean active;
 
+     @ManyToOne
+     @JoinColumn(name = "course_id")
+     private Course course;
 }
