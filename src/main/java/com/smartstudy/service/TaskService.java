@@ -19,6 +19,9 @@ public class TaskService {
 
      public Responce<Task> save(Task task){
           try {
+               if(task == null){
+                    return new Responce<Task>("Invalid information about task");
+               }
                Task savedTask = taskRepo.getReferenceById(task.getTaskId());
                if(savedTask != null){
                     return new Responce<>("Task Already exists");
@@ -33,6 +36,9 @@ public class TaskService {
 
      public Responce<Task> update(Task task){
           try {
+               if(task == null){
+                    return new Responce<Task>("Invalid information about task");
+               }
                Task updateTask = taskRepo.getReferenceById(task.getTaskId());
                if(updateTask == null){
                     return new Responce<>("Task not found");
@@ -48,6 +54,9 @@ public class TaskService {
 
      public Responce<Task> delete(Task task){
           try{
+               if(task == null){
+                    return new Responce<Task>("Invalid information about task");
+               }
                taskRepo.delete(task);
                return new Responce<>("Deleted  the task successfully");
           }catch(Exception e){
@@ -57,6 +66,9 @@ public class TaskService {
 
      public Responce<Task> search(Task task){
           try {
+               if(task == null){
+                    return new Responce<Task>("Invalid information about task");
+               }
                Task foundTask = taskRepo.findById(task.getTaskId()).get();
                if(foundTask == null){
                     return new Responce<>("Cannot find the task searched");

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -41,13 +40,14 @@ public class CourseController {
           return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
      }
 
-     @DeleteMapping(value = "/delete-course", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+     @PostMapping(value = "/delete-course", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
      public ResponseEntity<?> deleteCourse(@RequestBody Course course){
           Responce<Course> res = courseService.delete(course);
+          System.out.println(res.getInfo());
           return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
      }
 
-     @GetMapping(value = "/search-course", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+     @PostMapping(value = "/search-course", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
      public ResponseEntity<?> searchCourse(@RequestBody Course course){
           Responce<Course> res = courseService.search(course);
           return new ResponseEntity<>(res, HttpStatus.ACCEPTED);

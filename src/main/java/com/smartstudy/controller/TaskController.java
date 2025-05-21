@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.smartstudy.model.Task;
 import com.smartstudy.service.TaskService;
 import com.smartstudy.utils.Responce;
 
 @RequestMapping("/api/v1/task")
+@RestController
 public class TaskController {
      @Autowired
      private TaskService taskService;

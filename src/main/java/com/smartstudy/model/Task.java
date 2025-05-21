@@ -3,10 +3,14 @@ package com.smartstudy.model;
 import java.util.Date;
 import java.util.UUID;
 
+import org.hibernate.annotations.Check;
+
 import com.smartstudy.enums.EStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Check(constraints = "start_date < end_date")
 public class Task {
      @Id
      @Column(name = "task_id")
@@ -40,6 +45,7 @@ public class Task {
      @Column(name = "end_date")
      private Date endDate;
 
+     @Enumerated(EnumType.STRING)
      @Column(name="status")
      private EStatus status;
 

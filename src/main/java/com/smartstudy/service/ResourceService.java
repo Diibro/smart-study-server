@@ -18,6 +18,9 @@ public class ResourceService {
 
      public Responce<Resource> save(Resource resource){
           try {
+               if(resource == null){
+                    return new Responce<Resource>("invalid resource information");
+               }
                Resource res = resourceRepo.save(resource);
                if(res != null){
                     return new Responce<Resource>(res, null, "Resource saved successfully");
@@ -32,7 +35,9 @@ public class ResourceService {
 
      public Responce<Resource> update(Resource resource){
           try {
-
+               if(resource == null){
+                    return new Responce<Resource>("Invalid reource information");
+               }
                Resource resourseToUpdate = resourceRepo.getReferenceById(resource.getResourceId());
                if(resourseToUpdate != null){
                     BeanUtils.copyProperties(resource, resourseToUpdate, ModelUtils.getNullPropertyNames(resource));
@@ -49,6 +54,9 @@ public class ResourceService {
 
      public Responce<Resource> delete(Resource resource){
           try {
+               if(resource == null){
+                    return new Responce<Resource>("Invalid reource information");
+               }
                resourceRepo.delete(resource);
                return new Responce<Resource>("Reource deleted successfully");
           } catch (Exception e) {
@@ -59,6 +67,9 @@ public class ResourceService {
 
      public Responce<Resource> search(Resource resource){
           try {
+               if(resource == null){
+                    return new Responce<Resource>("Invalid reource information");
+               }
                Resource res = resourceRepo.findById(resource.getResourceId()).get();
                if(res != null){
                     return new Responce<Resource>(res, null, "Resource found.");

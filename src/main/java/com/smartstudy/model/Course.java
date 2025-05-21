@@ -56,8 +56,8 @@ public class Course {
      private boolean active;
 
      @ManyToOne
-     @JoinColumn(name="user_id")
-     private User user; 
+     @JoinColumn(name="user_email")
+     private MyUser user; 
 
      @OneToMany(mappedBy="course", fetch = FetchType.EAGER)
      private List<Resource> resources;

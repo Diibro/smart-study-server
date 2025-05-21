@@ -18,13 +18,18 @@ public class CourseService {
 
      public Responce<Course> save(Course course){
           try {
-               Course savedCourse = courseRepo.getReferenceById(course.getCourseId());
-               if(savedCourse != null){
-                    return new Responce<>("Course Already exists");
+               if(course != null){
+                    Course savedCourse = courseRepo.getReferenceById(course.getCourseId());
+                    if(savedCourse != null){
+                         return new Responce<>("Course Already exists");
+                    }else{
+                         savedCourse = courseRepo.save(course);
+                         return new Responce<Course>(savedCourse, "Course saved successfully");
+                    }
                }else{
-                    savedCourse = courseRepo.save(course);
-                    return new Responce<Course>(savedCourse, "Course saved successfully");
+                    return new Responce<Course>("Invalid information");
                }
+               
           } catch (Exception e) {
                return new Responce<>(e,"Server Error");
           }
@@ -32,6 +37,9 @@ public class CourseService {
 
      public Responce<Course> update(Course course){
           try {
+               if(course == null) {
+                    return new Responce<Course>("Invalid course information");
+               }
                Course updateCourse = courseRepo.getReferenceById(course.getCourseId());
                if(updateCourse == null){
                     return new Responce<>("Course does not exist");
@@ -47,6 +55,9 @@ public class CourseService {
 
      public Responce<Course> delete(Course course){
           try{
+               if(course == null) {
+                    return new Responce<Course>("Invalid course information");
+               }
                courseRepo.delete(course);
                return new Responce<>("Delete  the course successfully");
           }catch(Exception e){
@@ -56,6 +67,9 @@ public class CourseService {
 
      public Responce<Course> search(Course course){
           try {
+               if(course == null) {
+                    return new Responce<Course>("invalid course information");
+               }
                Course foundCourse = courseRepo.findById(course.getCourseId()).get();
                if(foundCourse == null){
                     return new Responce<>("Cannot the course searched");

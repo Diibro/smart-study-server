@@ -1,10 +1,12 @@
 package com.smartstudy.model;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.smartstudy.enums.ERole;
@@ -26,7 +28,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+public class MyUser implements UserDetails {
+     
      @Id
      @Column(name = "email", nullable = false, unique = true)
      private String email;
@@ -55,8 +58,7 @@ public class User implements UserDetails {
 
      @Override
      public Collection<? extends GrantedAuthority> getAuthorities() {
-          // TODO Auto-generated method stub
-          throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+          return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
      }
 
      @Override
@@ -66,22 +68,23 @@ public class User implements UserDetails {
 
      @Override
      public boolean isAccountNonExpired() {
-          return this.isActive();
+          return this.active;
      }
 
      @Override
      public boolean isAccountNonLocked() {
-          return this.isActive();
+          return this.active;
      }
 
      @Override
      public boolean isCredentialsNonExpired() {
-          return this.isActive();
+          return this.active;
      }
 
      @Override
      public boolean isEnabled() {
-          return this.isActive();
+          return this.active;
      }
+
 
 }
